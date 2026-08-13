@@ -1,0 +1,120 @@
+/* Jean-Marc Ntepp — homepage hero, LaTeX-article inspired */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem;
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+.hero-inner {
+  max-width: 620px;
+  width: 100%;
+  text-align: center;
+  font-family: "Lora", serif;
+}
+
+.hero-name {
+  font-weight: 700;
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  color: #111111;
+  margin: 0 0 0.9rem;
+  line-height: 1.2;
+}
+
+.hero-rule {
+  width: 220px;
+  height: 1px;
+  background-color: #1a1a1a;
+  margin: 0 auto 0.9rem;
+}
+
+.hero-role {
+  font-style: italic;
+  font-size: clamp(1.05rem, 2vw, 1.2rem);
+  color: #333333;
+  margin-bottom: 2.75rem;
+}
+
+.hero-abstract-label {
+  font-family: "Open Sans", sans-serif;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #555555;
+  margin-bottom: 0.6rem;
+}
+
+.hero-tagline {
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.75;
+  font-size: 1.05rem;
+  color: #222222;
+  margin: 0 auto 2rem;
+}
+
+.hero-credentials {
+  font-family: "Open Sans", sans-serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #555555;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  padding: 0.7rem 0;
+  margin-bottom: 2.75rem;
+}
+
+.hero-credentials .dot {
+  margin: 0 0.6em;
+  color: #999999;
+  font-style: normal;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.hero-btn {
+  font-family: "Open Sans", sans-serif;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.65rem 1.4rem;
+  border: 1px solid #1a1a1a;
+  text-decoration: none;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.hero-btn:hover {
+  text-decoration: none;
+}
+
+.hero-btn-primary {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.hero-btn-primary:hover {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.hero-btn-secondary {
+  background-color: transparent;
+  color: #1a1a1a;
+}
+
+.hero-btn-secondary:hover {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
