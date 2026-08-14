@@ -1,103 +1,103 @@
 ---
 layout: post
-title: "Comment j'ai préparé et réussi l'examen Claude Certified Architect – Foundations d'Anthropic"
-subtitle: "Ce que l'examen teste vraiment, les ressources qui m'ont le plus aidé, et ce que je changerais la prochaine fois."
-tags: [IA, Claude Code, Certification]
+title: "How I Prepared for and Passed the Anthropic Claude Certified Architect Foundations Exam"
+subtitle: "What the exam actually tests, which resources helped me most, and what I would do differently next time."
+tags: [AI, Claude Code, Certification]
 comments: false
 social-share: true
 ---
 
-*Rédigé en août 2026, sur la base de la version 1.0 de l'Exam Guide.*
+*Written August 2026, based on Exam Guide version 1.0.*
 
-J'ai récemment préparé et réussi l'examen **Claude Certified Architect – Foundations**, après cinq semaines de préparation en parallèle de mon emploi à temps plein. Ce chiffre mérite d'être nuancé : j'utilisais déjà Claude Code depuis près d'un an en environnement d'entreprise, notamment pour configurer des serveurs MCP en production et construire des agents. Avec cette expérience, je pense que deux semaines bien ciblées suffiraient à un praticien expérimenté.
+I recently prepared for and passed the **Claude Certified Architect – Foundations** exam after five weeks preparing alongside my full-time job. That number needs context: I had already been using Claude Code in an enterprise engineering environment for close to a year, including configuring MCP servers used in production and building agents. With that experience, I believe two focused weeks would be enough for an experienced practitioner.
 
-Cette expérience s'est révélée plus transférable que je ne le pensais. Les scénarios de l'examen sont fondamentalement des problèmes d'arbitrage : fiabilité contre simplicité, isolation contre contexte partagé, capacité contre rayon d'impact (*blast radius*), latence contre coût. Le raisonnement sous-jacent est familier à quiconque a conçu des systèmes logiciels non triviaux.
+That experience transferred more than I expected. The exam scenarios are fundamentally trade-off problems: reliability versus simplicity, isolation versus shared context, capability versus blast radius, latency versus cost. The underlying reasoning is familiar to anyone who has designed non-trivial software systems.
 
-Mon principal constat : ce n'est pas avant tout un examen de connaissance de l'API Claude ou de prompt engineering. C'est un examen d'architecture et de prise de décision, construit autour de scénarios de production réalistes.
+My biggest takeaway: this is not primarily a "Claude API or prompt engineering knowledge" exam. It is an architecture and decision-making exam built around realistic production scenarios.
 
-## L'examen en un coup d'œil
+## The exam at a glance
 
-Avant de parler de préparation, voici le format tel que publié dans l'Exam Guide officiel.
+Before getting into preparation, here is the format as published in the official Exam Guide.
 
-- **Questions** : 60, à choix multiple, une seule bonne réponse
-- **Durée** : 120 minutes
-- **Scénarios** : 4 tirés d'un pool de 6, chacun servant de contexte narratif à environ un quart des questions
-- **Domaines** : 5, pondérés de façon inégale
-- **Score de réussite** : 720 sur une échelle de 100 à 1 000 — un score pondéré, pas un pourcentage de bonnes réponses
-- **Passage** : Pearson VUE, en ligne sous surveillance ou en centre d'examen
-- **Tarif** : 125 $
-- **Validité du certificat** : 12 mois
-- **Profil visé** : environ six mois d'expérience pratique avec les API Claude, l'Agent SDK, Claude Code et MCP — pas seulement quelqu'un ayant suivi des tutoriels
+- **Questions**: 60, multiple choice, one correct answer each
+- **Time**: 120 minutes
+- **Scenarios**: 4 selected from a pool of 6, each providing the narrative context for roughly a quarter of the questions
+- **Domains**: 5, unevenly weighted
+- **Passing score**: 720 on a scaled range of 100–1,000, which is a scaled score and not a percentage of questions answered correctly
+- **Delivery**: Pearson VUE, online proctored or at a test centre
+- **Fee**: $125 USD
+- **Credential validity**: 12 months
+- **Target candidate**: roughly six months of practical experience across the Claude APIs, the Agent SDK, Claude Code and MCP, rather than someone who has only completed tutorials
 
-Un point à vérifier avant d'investir plusieurs semaines de préparation : l'éligibilité. En août 2026, le programme de certification Claude est ouvert aux organisations membres du Claude Partner Network, et réussir l'examen compte dans le statut de l'organisation au sein du réseau — l'inscription se fait via votre employeur s'il en fait partie, avec votre adresse e-mail professionnelle.
+One point worth checking before you invest weeks of preparation: eligibility. As of August 2026, the Claude Certification Program is open to organizations in the Claude Partner Network, and passing counts toward Claude Partner Network standing — registration goes through your employer if it's a partner, using your professional email.
 
-La page de certification, elle, est publique : seule l'inscription est verrouillée. N'importe qui peut consulter la pondération des domaines, le format, et surtout télécharger l'Exam Guide depuis cette page. Si votre organisation ne fait pas partie du réseau, l'examen reste hors de portée pour l'instant — mais la préparation décrite ci-dessous, elle, ne l'est pas.
+The certification page is public, though, and only the registration itself is gated. Anyone can read the domain weightings, the format, and — more importantly — download the Exam Guide from there. If your organization isn't in the network, the exam is out of reach for now, but the preparation described below isn't.
 
-Les cinq domaines notés, dans l'ordre du guide :
+The five scored domains, in the order the guide presents them:
 
-1. Agentic Architecture & Orchestration — 27 %
-2. Tool Design & MCP Integration — 18 %
-3. Claude Code Configuration & Workflows — 20 %
-4. Prompt Engineering & Structured Output — 20 %
-5. Context Management & Reliability — 15 %
+1. Agentic Architecture & Orchestration — 27%
+2. Tool Design & MCP Integration — 18%
+3. Claude Code Configuration & Workflows — 20%
+4. Prompt Engineering & Structured Output — 20%
+5. Context Management & Reliability — 15%
 
-L'important n'est pas de mémoriser ces chiffres, mais de comprendre comment ces domaines interagissent dans un scénario de production — et de remarquer qu'un seul domaine représente plus d'un quart de l'examen.
+The important thing is not to memorize these numbers. It is to understand how those areas interact inside a production scenario — and to notice that a single domain carries more than a quarter of the exam.
 
-## Que teste réellement la certification ?
+## What does the certification actually test?
 
-Une idée reçue avant de commencer la préparation est de penser que cet examen porte principalement sur la connaissance de l'API Claude ou de Claude Code. Ce n'est pas le cas.
+A common misconception before starting the preparation is that this exam is mainly a test of Claude API, or Claude Code knowledge. It isn't.
 
-Les questions s'appuient sur des situations clients réalistes — agents de support client, systèmes de recherche multi-agents, workflows de développement avec Claude Code, CI/CD, productivité des développeurs, extraction de données structurées — et on attend de vous des décisions d'architecture, de configuration et d'arbitrage de production. La formulation reflète cela : on ne vous demande pas si une fonctionnalité existe, on vous donne une situation, un ensemble de contraintes et plusieurs options techniquement plausibles, puis on vous demande laquelle correspond le mieux.
+The questions are grounded in realistic customer situations — customer-support agents, multi-agent research systems, Claude Code development workflows, CI/CD, developer productivity and structured data extraction — and you are expected to make decisions about architecture, configuration and production trade-offs. The wording reflects that: you are not asked whether a feature exists, you are given a situation, a set of constraints and several technically plausible options, and asked which design is the best fit.
 
-Cette nuance compte, car plusieurs réponses peuvent fonctionner dans la réalité. La bonne réponse est celle qui traite le problème réel tout en respectant toutes les contraintes du scénario. Le guide officiel est explicite sur ce point : les mauvaises options sont rédigées pour paraître raisonnables à quelqu'un dont les connaissances ou l'expérience sont incomplètes. Par exemple, on ne vous demandera pas simplement :
+That distinction matters because several answers may work in the real world. The correct answer is the one that addresses the actual problem while respecting all the constraints in the scenario. The official guide is explicit on this point: the incorrect options are written to look reasonable to someone with incomplete knowledge or experience. For example, you are not simply asked:
 
-> « Que fait la fonctionnalité X ? »
+> "What does feature X do?"
 
-Vous êtes bien plus susceptible de rencontrer une question du type :
+You are much more likely to encounter something closer to:
 
-> « Votre agent en production se comporte mal dans ces conditions. Quel changement architectural résoudrait le problème le plus efficacement ? »
+> "Your production agent behaves incorrectly under these conditions. Which architectural change would most effectively address the problem?"
 
-## Les pièges architecturaux que j'ai sous-estimés
+## The architectural traps I underestimated
 
-C'est la partie à laquelle je consacrerais plus de temps si je devais recommencer.
+This is the part I would spend more time on if I were preparing again.
 
-**Le batching n'est pas une optimisation de coût.** J'avais classé la Message Batches API dans la case « moins cher » et n'y avais plus touché. Ce qui compte réellement, c'est de savoir si le workflow est bloquant : une vérification pré-merge que des développeurs attendent a besoin d'une latence prévisible, un rapport de dette technique généré la nuit n'en a pas besoin. Dès que j'ai commencé à lire les scénarios en cherchant le caractère bloquant plutôt que le coût, cette famille de questions a cessé d'être ambiguë.
+**Batching is not a cost optimization.** I had filed the Message Batches API under "cheaper" and left it there. The question that actually decides is whether the workflow blocks: a pre-merge check that developers are waiting on needs predictable latency, an overnight technical-debt report does not. Once I started reading scenarios for blocking behaviour rather than for cost, that family of questions stopped being ambiguous.
 
-**Ressources MCP contre outils (tools).** Dans les serveurs que j'avais construits, presque tout était exposé comme un outil ; les outils sont familiers et faciles à invoquer. Mais quand un agent doit appeler un outil simplement pour découvrir quel contenu existe, chaque tour de conversation sert à explorer, pas à agir. Le contenu que l'agent doit simplement lire relève d'une ressource ; les actions qui modifient un état relèvent d'un outil. Appliquer cette distinction à mon travail a nettement réduit le bruit d'exploration — c'est ainsi que je sais qu'elle n'est pas que théorique.
+**MCP resources versus tools.** In the servers I had built, almost everything was exposed as a tool; tools are familiar and easy to invoke. When an agent has to call a tool simply to discover what content exists, you are paying turns for exploration. Content the agent needs to read belongs as a resource; actions that change state belong as tools. Applying that split back at work reduced the exploratory chatter noticeably, which is how I know the distinction is not academic.
 
-**Le contexte est un budget, pas un conteneur.** Mon réflexe sur les tâches longues était de tout garder dans une seule conversation et de la compacter quand elle devenait lourde, ou de systématiquement repartir sur une nouvelle session. La discipline la plus efficace consiste à dépenser le contexte délibérément : élaguer les sorties d'outils verbeuses, conserver des faits structurés plutôt que la transcription brute, isoler le contexte des sous-agents pour que l'exploration ne touche jamais le fil principal, et persister l'état quand le travail dépasse les limites du contexte.
+**Context is a budget, not a container.** My instinct on long-running work had been to keep everything in one conversation and compact it when it got heavy, or systematically start a new session. The stronger discipline is to spend context deliberately: trim verbose tool output, preserve structured facts rather than raw transcript, isolate subagent context so exploration never touches the main thread, and persist state when the work crosses context boundaries.
 
-**La conception du schéma l'emporte sur les instructions de prompt.** Le réflexe habituel pour améliorer un prompt est d'ajouter une phrase de plus : « fais attention, n'invente pas, dis quand tu ne sais pas ». Concevoir le schéma de sortie pour que l'incertitude soit représentable est plus efficace : champs nullables, enums adaptés, un cas « inconnu » explicite. Un modèle qui dispose d'un moyen valide de dire que l'information manque cesse de combler le vide avec quelque chose de plausible.
+**Schema design beats prompt instructions.** The general reflex to improve a prompt is to add another sentence to it: be careful, do not invent, say when you do not know. Designing the output schema so that uncertainty is representable is stronger: nullable fields, appropriate enums, an explicit unknown case. A model that has a valid way to say the information was missing stops filling the gap with something plausible.
 
-**Garantie déterministe contre conformité probabiliste.** C'est le schéma sous-jacent à tous les autres. Si une règle métier doit toujours être respectée, la réponse est un hook ou un prérequis programmatique — pas une instruction de plus dans le system prompt. Toute option qui demande au modèle d'être fiable sur un point que le système pourrait simplement imposer est en général l'option à éliminer.
+**Deterministic guarantees versus probabilistic compliance.** This is the pattern behind all the others. If a business rule must always hold, a hook or a programmatic prerequisite is the answer, not another instruction in the system prompt. Any option that asks the model to be reliable about something the system could simply enforce is usually the option to eliminate.
 
-C'est là que l'expérience de production m'a le plus aidé — et c'est aussi là qu'elle peut induire en erreur. L'architecture que vous exploitez déjà peut très bien fonctionner ; l'examen demande quel schéma est le plus approprié compte tenu des contraintes données. Par exemple, quand un client demande explicitement un agent humain pour une simple réinitialisation de mot de passe, mon réflexe de production — optimisé pour la déflection de tickets — était d'essayer de résoudre la demande de façon autonome avant d'escalader. Anthropic exige au contraire de respecter immédiatement toute demande explicite d'agent humain, sans tentative d'investigation préalable. Les habitudes d'économie propres à l'entreprise peuvent facilement vous orienter vers la mauvaise réponse.
+Production experience helped me most here — and it is also where it can mislead you. The architecture you already run may work perfectly well; the exam asks which pattern is most appropriate under the constraints provided. For example, when a customer explicitly demands a human for a simple password reset, my production instinct — optimized for ticket deflection — was to try resolving it autonomously first. However, Anthropic strictly requires honoring explicit customer requests for human agents immediately, without attempting investigation. Cost-saving enterprise habits can easily point you to the wrong answer.
 
-## Ce que j'ai réellement utilisé pour me préparer
+## What I actually used to prepare
 
-Ma préparation a été délibérément pratique.
+My preparation was deliberately hands-on.
 
-**Apprendre :** j'ai suivi les cours gratuits d'Anthropic Academy, en particulier *Building with the Claude API* et *Claude Code in Action*. Le premier couvre l'usage des outils, la sortie structurée, MCP et les workflows d'agents ; le second se concentre sur la configuration, le Plan Mode, les skills, les hooks, l'automatisation et les workflows de longue durée. Je ne me suis pas contenté de les regarder.
+**Learn:** I worked through the free Anthropic Academy courses, especially *Building with the Claude API* and *Claude Code in Action*. The first covers tool use, structured output, MCP and agent workflows; the second focuses on configuration, Plan Mode, skills, hooks, automation and longer-running workflows. I did not simply watch them.
 
-**Construire :** chaque concept reproduit en code plutôt que simplement visionné — boucles d'agents, configuration de Claude Code, outils MCP, un pipeline d'extraction structurée, un petit système multi-agents. L'examen récompense la compréhension opérationnelle plus que la reconnaissance, et l'écart entre les deux n'apparaît que face à un scénario.
+**Build:** every concept reproduced in code rather than watched — agent loops, Claude Code configuration, MCP tools, a structured extraction pipeline, a small multi-agent system. The exam rewards operational understanding over recognition, and the gap between the two only shows up under a scenario.
 
-**Schématiser :** une tablette toujours à portée de main, pour redessiner chaque pattern avant de considérer l'avoir compris. Dessiner un orchestrateur qui délègue à trois workers, puis la même tâche sous forme de pipeline parallèle, rend la différence évidente : la topologie est presque identique, seul le moment où les sous-tâches sont décidées les distingue.
+**Sketch:** a tablet with me throughout, redrawing each pattern by hand before assuming I had understood it. Drawing an orchestrator delegating to three workers, then the same task as a parallel pipeline, is what made the difference obvious: the topology is nearly identical, and only the moment the subtasks are decided separates them.
 
-Une chose que je changerais, en revanche, c'est l'ordre. J'ai commencé par les cours et n'ai vraiment étudié l'Exam Guide qu'après. Je ferais l'inverse : **lire d'abord l'Exam Guide.**
+One thing I would change, however, is the order. I started with the courses and only properly studied the Exam Guide afterwards. I would do the opposite: **read the Exam Guide first.**
 
-L'Exam Guide est la carte : domaines, objectifs, scénarios et exemples de questions. Lisez-le avant de commencer les cours, puis transformez chaque objectif en checklist simple :
+The Exam Guide is the map: domains, task statements, scenarios and sample questions. Read it before starting the courses, then turn each objective into a simple checklist:
 
-Est-ce que je peux l'expliquer ? Est-ce que je peux l'implémenter ? Est-ce que je peux reconnaître le mauvais choix architectural dans un scénario ?
+Can I explain it? Can I implement it? Can I recognize the wrong architectural choice in a scenario?
 
-Chaque « non » devient un sujet d'étude. Cela a changé ma façon d'utiliser les cours : au lieu de me demander si un concept était important, je savais exactement quel objectif il m'aidait à couvrir.
+Every "no" becomes a study topic. That changed the way I used the courses; instead of wondering whether a concept was important, I knew exactly which objective it was helping me cover.
 
-## Ma boucle de préparation
+## My preparation loop
 
-Mon processus réel est devenu :
+My actual process became:
 
-**Exam Guide → Cours → Pratique → Examen blanc → Analyse des erreurs → Documentation → Recommencer**
+**Exam Guide → Courses → Hands-on practice → Mock exam → Analyze mistakes → Documentation → Repeat**
 
-J'ai généré des examens blancs avec Gemini Pro, en utilisant l'Exam Guide comme source de vérité. Il n'existe pas d'examen blanc officiel complet, même si le guide inclut des exemples de questions commentées. L'idée n'était pas de générer des questions au hasard : je voulais des questions qui reproduisent le style de raisonnement de l'examen — scénarios réalistes, contraintes explicites, quatre options plausibles et une seule bonne réponse.
+I generated mock exams using Gemini Pro, with the Exam Guide as the source of truth. There is no full official mock exam, although the guide includes sample questions and explanations. The idea was not to generate random trivia: I wanted questions that reproduced the exam's reasoning style — realistic scenarios, explicit constraints, four plausible options and one best answer.
 
 ```
 Using only the exam objectives provided below, generate one
@@ -117,61 +117,61 @@ Do not use information outside the provided objectives.
 Do not reproduce real exam questions.
 ```
 
-Cela a fini par être l'une des parties les plus utiles de ma préparation, car je pouvais générer de nouvelles questions dès que je découvrais un point faible.
+This became one of the most useful parts of my preparation, because I could generate new questions the moment I discovered a weak area.
 
-Mais une règle importante : les réponses générées sont un entraînement, pas une vérité. Ma hiérarchie des sources était l'Exam Guide, puis la documentation d'Anthropic, puis les cours officiels, puis ma propre expérience, et seulement ensuite le contenu généré. Dès qu'une explication d'examen blanc me semblait douteuse, je remontais cette hiérarchie.
+But there is one important rule: generated answers are practice, not truth. My source hierarchy was the Exam Guide, then Anthropic's documentation, then the official courses, then my own experience, and only then generated material. Whenever a mock explanation felt questionable, I went back up that ladder.
 
-## Avis sur les examens blancs tiers
+## Advice on third-party practice exams
 
-Côté ressources externes, j'ai fait un examen blanc de Frank Kane sur Udemy — *Anthropic Claude Certified Architect – Full Practice Exams* — utile pour exercer ce raisonnement avec un style de questions différent.
+For external material, I took one practice exam by Frank Kane on Udemy — *Anthropic Claude Certified Architect – Full Practice Exams* — which was a useful way to exercise the reasoning under a different question style.
 
-En dehors de ça, je n'ai rien trouvé de vraiment utile en ligne à la date de juillet 2026. Si vous connaissez une bonne ressource, n'hésitez pas à la partager en commentaire.
+Beyond that, I did not find anything genuinely useful online as of July 2026. If you know of a good resource, please leave it in the comments.
 
-Quelle que soit la ressource utilisée, ne cherchez pas à maximiser le nombre d'examens blancs faits. La valeur vient de ce qui se passe après la question : pour chaque erreur, retournez au cours ou à la documentation, identifiez précisément ce que vous aviez mal compris, puis trouvez une autre question ciblant le même concept.
+Whatever you use, don't try to maximize the number of mock exams. The value comes from what happens after the question: for every wrong answer, go back to the course or the documentation, name exactly what you had misunderstood, then find another question targeting the same concept.
 
-## Comment j'ai abordé les questions difficiles
+## How I approached difficult questions
 
-Ma stratégie par défaut était l'élimination. Quand je ne connaissais pas la réponse immédiatement, j'arrêtais de me demander « quelle option est correcte ? » pour me demander « quelles options puis-je éliminer ? »
+My default strategy was elimination. When I did not immediately know the answer, I stopped asking "which option is correct?" and started asking "which options can I eliminate?"
 
-Pour chaque choix, je vérifiais :
+For every choice, I checked:
 
-- Résout-il le problème réel ?
-- Respecte-t-il toutes les contraintes explicites ?
-- Introduit-il une infrastructure que le scénario ne requiert pas ?
-- Donne-t-il à un agent plus d'outils ou de permissions que nécessaire ?
-- Repose-t-il sur un comportement probabiliste là où une application déterministe est requise ?
+- Does it solve the actual problem?
+- Does it respect every explicit constraint?
+- Does it introduce infrastructure that the scenario does not require?
+- Does it give an agent more tools or permissions than necessary?
+- Does it rely on probabilistic behavior where deterministic enforcement is required?
 
-En général, deux options deviennent faciles à éliminer, et il reste un arbitrage architectural bien plus restreint. Mon modèle mental pendant l'examen est devenu :
+Usually two options become easy to eliminate, and what remains is a much smaller architectural trade-off. My mental model during the exam became:
 
-**Scénario → Objectif → Contraintes → Éliminer → Comparer les arbitrages → Choisir**
+**Scenario → Objective → Constraints → Eliminate → Compare trade-offs → Choose**
 
-Le piège consiste à choisir une réponse parce qu'elle fonctionnerait. Fonctionner ne suffit pas : la question porte sur la conception que le scénario exige réellement.
+The trap is selecting an answer because it would work. Working is not enough, the question is asking for the design the scenario actually demands.
 
-## Gestion du temps
+## Time management
 
-La limite de 120 minutes donne en moyenne deux minutes par question, mais je ne traiterais pas ces deux minutes comme un objectif. Certaines questions se répondent en quelques secondes dès qu'on maîtrise le concept sous-jacent ; d'autres demandent plusieurs minutes parce qu'il faut lire le scénario attentivement et comparer des arbitrages architecturaux.
+The 120-minute limit gives you an average of two minutes per question, but I would not treat two minutes as a target. Some questions take seconds when you know the underlying concept; others require several minutes because you need to read the scenario carefully and compare architectural trade-offs.
 
-J'ai donc avancé rapidement sur les questions évidentes pour préserver ma capacité mentale pour les scénarios longs. Une question lente ne signifie pas que vous vous en sortez mal — cela signifie généralement qu'elle teste votre jugement plutôt que votre mémoire.
+I therefore moved quickly through the obvious questions and preserved mental bandwidth for the long scenarios. A slow question does not mean you are doing badly, it usually means the question is testing judgment rather than recall.
 
-## Les erreurs que j'éviterais
+## The mistakes I would avoid
 
-- Commencer par les cours plutôt que par l'Exam Guide.
-- Regarder les leçons au lieu de les reproduire en code, selon votre niveau d'expérience avec Claude.
-- Faire confiance à des réponses générées ou tierces sans vérifier la documentation.
-- Mémoriser les réponses des examens blancs au lieu de comprendre pourquoi les autres options échouent.
-- Supposer que ce que vous exploitez déjà en production est automatiquement le pattern attendu par l'examen.
-- Apprendre de nouvelles notions la veille — j'ai utilisé le dernier jour pour relire l'Exam Guide et consolider, pas pour élargir le programme.
+- Starting with the courses instead of the Exam Guide.
+- Watching lessons instead of reproducing them in code, depending on your experience building with Claude.
+- Trusting generated or third-party answers without checking the documentation.
+- Memorizing mock answers instead of understanding why the alternatives fail.
+- Assuming that what you already ship in production is automatically the pattern the exam expects.
+- Learning new material the day before. I used the final day to reread the Exam Guide and consolidate, not to expand the syllabus.
 
-## Ce que je retiens de cette certification
+## What I took away from the certification
 
-Le résultat le plus précieux n'est pas le certificat lui-même. Me préparer m'a obligé à mettre des noms et des limites précis sur des patterns que j'utilisais déjà : orchestration d'agents, isolation des outils, transferts structurés, gestion du contexte, application déterministe et escalade humaine.
+The most valuable outcome was not the credential itself. Preparing forced me to put explicit names and boundaries around patterns I was already using: agent orchestration, tool isolation, structured handoffs, context management, deterministic enforcement and human escalation.
 
-Cela a rendu la préparation utile bien au-delà de l'examen. On arrête de penser aux agents comme une collection de prompts et d'outils, et on commence à les considérer comme des systèmes logiciels avec un état, des modes de défaillance, des interfaces, des permissions et des arbitrages architecturaux. C'est, au fond, ce que je pense que la certification évalue :
+That made the preparation useful beyond the exam. You stop thinking about agents as a collection of prompts and tools, and start reasoning about them as software systems with state, failure modes, interfaces, permissions and architectural trade-offs. That, ultimately, is what I think the certification is testing:
 
-Pas si vous pouvez faire faire quelque chose à Claude. Mais si vous pouvez concevoir un système autour de Claude qui se comporte correctement quand les contraintes deviennent réelles.
+Not whether you can make Claude do something. Whether you can design a system around Claude that behaves appropriately when the constraints become real.
 
-Et cela voyage. L'examen est écrit autour de la stack d'Anthropic, mais l'essentiel de ce qu'il évalue n'est pas spécifique à un fournisseur : quand laisser un modèle décider et quand imposer une règle dans le code, comment répartir une tâche entre agents et quand ne pas le faire, ce qui relève de la fenêtre de contexte et ce qui relève d'un fichier, comment concevoir un schéma capable de représenter ce que le modèle ne sait pas. Ces décisions se ressemblent, que le modèle sous-jacent soit Claude, Gemini ou GPT. Le raisonnement architectural se transfère, et c'est ce qui garde sa valeur quand la stack change sous vos pieds.
+And it travels. The exam is written against Anthropic's stack, but most of what it drills is not vendor-specific: when to let a model decide and when to enforce a rule in code, how to split a task across agents and when not to, what belongs in the context window and what belongs in a file, how to design a schema that can represent what the model doesn't know. Those decisions look the same whether the model underneath is Claude, Gemini or GPT. The architectural reasoning transfers, and that is the part that keeps its value when the stack changes under you.
 
 ---
 
-Bonne chance à tous ceux qui préparent l'examen Claude Certified Architect – Foundations. Et si vous l'avez déjà passé, je serais curieux de savoir quelle partie de la préparation vous a semblé la plus difficile.
+Good luck to everyone preparing for the Claude Certified Architect – Foundations exam. And if you have already taken it, I would be interested to hear which part of the preparation you found most challenging.
